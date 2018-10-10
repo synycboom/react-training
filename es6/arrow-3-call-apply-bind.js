@@ -10,8 +10,8 @@ const func = fizz.print
 func.call(fizz, 5)
 func.apply(fizz, [5])
 
-const bindedFunc1 = fizz.print.bind(fizz)
-const bindedFunc2 = fizz.print.bind(fizz, 10)
+const boundFunc1 = fizz.print.bind(fizz)
+const boundFunc2 = fizz.print.bind(fizz, 10)
 
-bindedFunc1(10)
-bindedFunc2()
+boundFunc1(10)
+boundFunc2()
