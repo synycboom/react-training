@@ -1,7 +1,9 @@
-let updateFunctions = []
-for (var i = 0; i < 2; i++) {
-    updateFunctions.push(function() {
-        console.log(i)
-    })
+function foo(x) {
+    var y = 5
+    return function (z) {
+        return x + y + z
+    }
 }
-updateFunctions[0]()
+
+var bar = foo(1)
+console.log(bar(10))
