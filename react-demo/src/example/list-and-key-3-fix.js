@@ -1,3 +1,6 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+
 function NumberList(props) {
     const numbers = props.numbers;
     const listItems = numbers.map((number) =>

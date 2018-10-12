@@ -1,3 +1,6 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+
 // There are no keys specified in <li> tags
 function NumberList(props) {
     const numbers = props.numbers

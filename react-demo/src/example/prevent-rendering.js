@@ -1,3 +1,6 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+
 function WarningBanner(props) {
     if (!props.warn) {
         return null

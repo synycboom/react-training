@@ -1,3 +1,6 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+
 // In HTML, <select> creates a drop-down list
 
 // <select>

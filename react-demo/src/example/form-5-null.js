@@ -1,3 +1,6 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+
 // The input is locked at first but becomes editable after a short delay
 
 ReactDOM.render(<input value="hi" />, document.getElementById('root'))

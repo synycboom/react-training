@@ -1,3 +1,6 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+
 /* 
     In HTML, a <textarea> element defines its text by its children
 

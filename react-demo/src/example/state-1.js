@@ -1,3 +1,6 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+
 // Adding Local State to a Class
 
 class Clock extends React.Component {

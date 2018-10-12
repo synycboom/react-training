@@ -1,3 +1,6 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+
 // elements can also represent user-defined components
 // props are read-only
 
