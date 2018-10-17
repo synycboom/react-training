@@ -1,6 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-export default function Paginator(props) {
+function Paginator(props) {
     const {
         page,
         pageSize,
@@ -14,7 +15,7 @@ export default function Paginator(props) {
     const options = pages.map(n =>
         <option key={n} value={n}>{n}</option>
     )
-
+    
     return (
         <div className='Paginator'>
             <label className='Paginator__label'>Page Size: {pageSize}</label>
@@ -28,3 +29,12 @@ export default function Paginator(props) {
         </div>
     )
 }
+
+PropTypes.propTypes = {
+    page: PropTypes.number,
+    pageSize: PropTypes.number,
+    totalPages: PropTypes.number,
+    onPageChange: PropTypes.func,
+}
+
+export default Paginator

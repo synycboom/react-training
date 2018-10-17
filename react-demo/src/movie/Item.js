@@ -1,11 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-export default function Item(props) {
-    const {
-        title,
-        rating,
-    } = props
-
+function Item({ title, rating }) {
     return (
         <div className='Item'>
             <div>{title}</div>
@@ -13,3 +9,12 @@ export default function Item(props) {
         </div>
     )
 }
+
+Item.propTypes = {
+    title: PropTypes.string,
+    rating: PropTypes.oneOfType([
+        PropTypes.number, PropTypes.string
+    ]),
+}
+
+export default Item

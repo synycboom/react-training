@@ -1,11 +1,8 @@
 import React from 'react'
 import Item from './Item.js'
+import PropTypes from 'prop-types'
 
-export default function Content(props) {
-    const {
-        items
-    } = props
-
+const Content = ({ items }) => {
     const itemElements = items.map(item => 
         <Item
             key={item.id}
@@ -13,10 +10,15 @@ export default function Content(props) {
             rating={item.imdbRating}
         />
     )
-
     return (
         <div className='Content'>
             {itemElements}
         </div>
     )
 }
+
+Content.propTypes = {
+    items: PropTypes.array
+}
+
+export default Content

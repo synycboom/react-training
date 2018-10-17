@@ -1,7 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import FilterInput from './FilterInput'
 
-export default function SearchPanel(props) {
+function SearchPanel(props) {
     const {
         checkMovie,
         checkRating,
@@ -42,3 +43,17 @@ export default function SearchPanel(props) {
         </div>
     )
 }
+
+SearchPanel.propTypes = {
+    checkMovie: PropTypes.bool,
+    checkRating: PropTypes.bool,
+    movieValue: PropTypes.string,
+    ratingValue: PropTypes.string,
+    onMovieCheckChange: PropTypes.func,
+    onMovieValueChange: PropTypes.func,
+    onRatingCheckChange: PropTypes.func,
+    onRatingValueChange: PropTypes.func,
+    onSearch: PropTypes.func,
+}
+
+export default SearchPanel

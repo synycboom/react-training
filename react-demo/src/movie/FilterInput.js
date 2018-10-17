@@ -1,6 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-export default class FilterInput extends React.Component {
+class FilterInput extends React.Component {
     render() {
         const {
             label,
@@ -31,3 +32,13 @@ export default class FilterInput extends React.Component {
         ) 
     }
 }
+
+FilterInput.propTypes = {
+    label: PropTypes.string,
+    checked: PropTypes.bool,
+    value: PropTypes.string,
+    onCheckChange: PropTypes.func,
+    onValueChange: PropTypes.func,
+}
+
+export default FilterInput
