@@ -1,1 +1,1 @@
-To see a solution for the movie app, you have to checkout branch 'movie-solution'
+To see a solution for the movie app (src/movie), you have to checkout a 'movie-solution' branch
