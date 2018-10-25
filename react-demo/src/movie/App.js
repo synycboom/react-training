@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './App.css'
+import ReactTable from 'react-table'
 import SearchPanel from './SearchPanel.js'
-import Paginator from './Paginator.js'
-import Content from './Content.js'
-import movieData from './movie.json'
+import axios from 'axios'
+import './App.css'
+import 'react-table/react-table.css'
 
 class App extends Component {
     constructor(props) {
@@ -14,9 +14,6 @@ class App extends Component {
             checkRating: false,
             movieValue: '',
             ratingValue: '',
-            totalPages: 1,
-            page: 1,
-            pageSize: 3,
             items: [],
         }
         this.handleMovieCheckChange = this.handleCheckChange.bind(
@@ -39,39 +36,40 @@ class App extends Component {
         )
     }
 
-    handleCheckChange(checkKey, valueKey, event) {
-        const checked = event.target.checked
+    handleCheckChange(checkKey, valueKey, event, data) {
+        const checked = data.checked
         this.setState(prevState => ({
             [checkKey]: checked,
             [valueKey]: checked ? prevState[valueKey] : ''
         }))
     }
 
-    handleValueChange(valueKey, event) {
-        this.setState({ [valueKey]: event.target.value })
+    handleValueChange(valueKey, event, data) {
+        this.setState({ [valueKey]: data.value })
     }
 
-    handleSearch = () => {
+    handleSearch = async () => {
         const {
             checkRating,
             checkMovie,
             ratingValue,
             movieValue,
-            pageSize,
         } = this.state
 
-        let items = movieData
+        const params = {}
+        const url = 'http://localhost:8000/apis/movies/'
 
-        if (checkRating) {
-            items = items.filter(item => item.imdbRating === parseFloat(ratingValue))
-        }
         if (checkMovie) {
-            items = items.filter(item => (new RegExp(`${movieValue}`, 'i')).test(item.title))
+            params['title__icontains'] = movieValue
         }
+        if (checkRating) {
+            params['imdb_rating'] = ratingValue
+        }
+
+        const response = await axios.get(url, { params: params })
+
         this.setState({
-            items,
-            page: 1,
-            totalPages: Math.ceil(items.length / pageSize) || 1, 
+            items: response.data
         })
     }
 
@@ -85,15 +83,8 @@ class App extends Component {
             checkRating,
             movieValue,
             ratingValue,
-            totalPages,
             items,
-            page,
-            pageSize,
         } = this.state
-
-        const minPage = (page - 1) * pageSize
-        const maxPage = minPage + pageSize
-        const paginatedItems = items.slice(minPage, maxPage)
 
         return (
             <div className='App'>
@@ -108,14 +99,22 @@ class App extends Component {
                     onRatingValueChange={this.handleRatingValueChange}
                     onSearch={this.handleSearch}
                 />
-                <Content
-                    items={paginatedItems}
-                />
-                <Paginator
-                    totalPages={totalPages}
-                    page={page}
-                    pageSize={pageSize}
-                    onPageChange={this.handlePageChange}
+                <ReactTable
+                    defaultPageSize={5}
+                    pageSizeOptions={[5, 10]}
+                    data={items}
+                    columns={[
+                        {
+                            Header: 'Title',
+                            accessor: 'title',
+                            Cell: row => <div style={{ textAlign: 'center' }}>{row.value}</div>
+                        },
+                        {
+                            Header: 'IMDB Rating',
+                            accessor: 'imdb_rating',
+                            Cell: row => <div style={{ textAlign: 'center' }}>{row.value}</div>
+                        }
+                    ]}
                 />
             </div>
         )

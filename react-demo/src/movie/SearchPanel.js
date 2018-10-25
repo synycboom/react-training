@@ -1,6 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import FilterInput from './FilterInput'
+import {
+    Form,
+    Segment,
+} from 'semantic-ui-react'
 
 function SearchPanel(props) {
     const {
@@ -16,31 +19,49 @@ function SearchPanel(props) {
     } = props
 
     return (
-        <div className='SearchPanel'>
-            <div className='SearchPanel__input-container'>
-                <FilterInput
-                    label='Movie Name'
-                    value={movieValue}
-                    checked={checkMovie}
-                    onCheckChange={onMovieCheckChange}
-                    onValueChange={onMovieValueChange}
-                />
-                <FilterInput
-                    label='IMDB Rating'
-                    value={ratingValue}
-                    checked={checkRating}
-                    onCheckChange={onRatingCheckChange}
-                    onValueChange={onRatingValueChange}
-                />
-            </div>
-
-            <button
-                className='SearchPanel__button'
-                onClick={onSearch}
-            >
-                Search
-            </button>
-        </div>
+        <Segment>
+            <Form>
+                <Form.Group inline>
+                    <Form.Checkbox 
+                        width={3}
+                        label='Movie Name'
+                        checked={checkMovie}
+                        onChange={onMovieCheckChange}
+                    />
+                    <Form.Input 
+                        width={7}
+                        value={movieValue}
+                        disabled={!checkMovie}
+                        onChange={onMovieValueChange}
+                    />
+                </Form.Group>
+                <Form.Group inline>
+                    <Form.Checkbox 
+                        width={3}
+                        label='IMDB Rating'
+                        checked={checkRating}
+                        onChange={onRatingCheckChange}
+                    />
+                    <Form.Input 
+                        width={7}
+                        value={ratingValue}
+                        disabled={!checkRating}
+                        onChange={onRatingValueChange}
+                    />
+                    <Form.Field
+                        width={2}
+                    />
+                    <Form.Button
+                        width={4}
+                        color='blue'
+                        fluid
+                        onClick={onSearch}
+                    >
+                        Search
+                    </Form.Button>
+                </Form.Group>
+            </Form>
+        </Segment>
     )
 }
 
